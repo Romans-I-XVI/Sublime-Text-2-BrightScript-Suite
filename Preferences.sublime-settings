@@ -1,0 +1,9 @@
+{
+	"auto_complete_commit_on_tab": false,
+	"auto_complete_with_fields": false,
+	"font_size": 8,
+	"ignored_packages":
+	[
+		"Vintage"
+	]
+}

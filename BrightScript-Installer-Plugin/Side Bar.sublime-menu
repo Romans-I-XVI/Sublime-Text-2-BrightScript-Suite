@@ -1,0 +1,5 @@
+[
+	{ "caption": "-", "id": "folder_commands" },
+	{ "caption": "Install To Roku", "command": "install_to_roku", "args": {"dirs": []} },
+	{ "caption": "-", "id": "end" }
+]
