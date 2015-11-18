@@ -1,0 +1,30 @@
+[
+  {
+    "caption": "Preferences",
+    "mnemonic": "n",
+    "id": "preferences",
+    "children":
+    [
+      {
+        "caption": "Roku Installer",
+        "mnemonic": "n",
+        "id": "preferences",
+        "children":
+        [
+          {
+          "command": "install_to_roku_settings_username",
+          "caption": "Set Username"
+          },
+          {
+          "command": "install_to_roku_settings_password",
+          "caption": "Set Password"
+          },
+          {
+          "command": "install_to_roku_settings_ip",
+          "caption": "Set IP Address"
+          }
+        ]
+      }
+    ]
+  }
+]
