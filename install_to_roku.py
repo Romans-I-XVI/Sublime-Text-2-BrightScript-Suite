@@ -23,11 +23,12 @@ class InstallToRokuCommand(sublime_plugin.WindowCommand):
 				install = False
 
 			if install:
-				subprocess.Popen(["python", os.path.join("BrightScript-Installer-Plugin","install.py"), username, password, url, folder])
+				subprocess.Popen(["python", os.path.join(sublime.packages_path(), "User", "BrightScript-Installer-Plugin","install.py"), username, password, url, folder])
 				sublime.message_dialog("Your channel is being installed.\nPlease be patient, this may take a while.")
 
 	def is_visible(self, dirs):
 		return len(dirs) > 0
+
 
 class InstallToRokuSettingsIpCommand(sublime_plugin.WindowCommand):
 	def run(self):
@@ -46,6 +47,7 @@ class InstallToRokuSettingsIpCommand(sublime_plugin.WindowCommand):
 
 		sublime.Window.show_input_panel(sublime.active_window(), "Roku Ip Address", ip, on_done, on_change, on_cancel)
 
+
 class InstallToRokuSettingsUsernameCommand(sublime_plugin.WindowCommand):
 	def run(self):
 		settings = sublime.load_settings("InstallToRoku.sublime-settings")
@@ -62,6 +64,7 @@ class InstallToRokuSettingsUsernameCommand(sublime_plugin.WindowCommand):
 			print "changes not saved"
 			
 		sublime.Window.show_input_panel(sublime.active_window(), "Roku Developer Username", username, on_done, on_change, on_cancel)
+
 
 class InstallToRokuSettingsPasswordCommand(sublime_plugin.WindowCommand):
 	def run(self):
