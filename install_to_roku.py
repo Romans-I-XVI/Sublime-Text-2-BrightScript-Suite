@@ -1,43 +1,36 @@
 import sublime, sublime_plugin
-import sys
 import os
-import zipfile
-import pycurl
+import subprocess
 
 class InstallToRokuCommand(sublime_plugin.WindowCommand):
-    def run(self, dirs):
+	def run(self, dirs):
 		settings = sublime.load_settings("InstallToRoku.sublime-settings")
 		username = sublime.Settings.get(settings, "roku_username")
 		password = sublime.Settings.get(settings, "roku_password")
 		ip = sublime.Settings.get(settings, "roku_ip_address")
 		url = "http://"+ip+"/plugin_install"
-
 		folder = dirs[0]
-		zipfilename = "%s.zip" % (folder.replace("/", "_"))
-		zfile = zipfile.ZipFile("channel.zip", 'w', zipfile.ZIP_DEFLATED)
-		rootlen = len(folder) + 1
-		for base, dirs, files in os.walk(folder):
-		    for file in files:
-		        fn = os.path.join(base, file)
-		        zfile.write(fn, fn[rootlen:])
-		zfile.close()
 
-		curl = pycurl.Curl()
-		curl.setopt(pycurl.POST, 1)
-		curl.setopt(pycurl.URL, url)
-		curl.setopt(pycurl.HTTPPOST, [("mysubmit", "Install"), ("archive", (curl.FORM_FILE, "channel.zip"))])
-		curl.setopt(pycurl.HTTPAUTH, pycurl.HTTPAUTH_DIGEST)
-		curl.setopt(pycurl.USERNAME, username)
-		curl.setopt(pycurl.PASSWORD, password)
-		curl.perform()
+		if sublime.ok_cancel_dialog("Install folder '"+dirs[0]+"' to Roku at "+ip+"?", "Install"):
+			install = True
 
-		os.remove("channel.zip")
+			if not os.path.isfile(folder+"/manifest"):
+				sublime.message_dialog("'manifest' file missing")
+				install = False
 
-    def is_visible(self, dirs):
-        return len(dirs) > 0
+			if not os.path.isdir(folder+"/source"):
+				sublime.message_dialog("'source' directory missing")
+				install = False
+
+			if install:
+				subprocess.Popen(["python", "BrightScript-Installer-Plugin/install.py", username, password, url, folder])
+				sublime.message_dialog("Your channel is being installed.\nPlease be patient, this may take a while.")
+
+	def is_visible(self, dirs):
+		return len(dirs) > 0
 
 class InstallToRokuSettingsIpCommand(sublime_plugin.WindowCommand):
-    def run(self):
+	def run(self):
 		settings = sublime.load_settings("InstallToRoku.sublime-settings")
 		ip = sublime.Settings.get(settings, "roku_ip_address")
 
@@ -54,7 +47,7 @@ class InstallToRokuSettingsIpCommand(sublime_plugin.WindowCommand):
 		sublime.Window.show_input_panel(sublime.active_window(), "Roku Ip Address", ip, on_done, on_change, on_cancel)
 
 class InstallToRokuSettingsUsernameCommand(sublime_plugin.WindowCommand):
-    def run(self):
+	def run(self):
 		settings = sublime.load_settings("InstallToRoku.sublime-settings")
 		username = sublime.Settings.get(settings, "roku_username")
 
@@ -71,7 +64,7 @@ class InstallToRokuSettingsUsernameCommand(sublime_plugin.WindowCommand):
 		sublime.Window.show_input_panel(sublime.active_window(), "Roku Developer Username", username, on_done, on_change, on_cancel)
 
 class InstallToRokuSettingsPasswordCommand(sublime_plugin.WindowCommand):
-    def run(self):
+	def run(self):
 		settings = sublime.load_settings("InstallToRoku.sublime-settings")
 		password = sublime.Settings.get(settings, "roku_password")
 
