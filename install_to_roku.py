@@ -14,16 +14,16 @@ class InstallToRokuCommand(sublime_plugin.WindowCommand):
 		if sublime.ok_cancel_dialog("Install folder '"+dirs[0]+"' to Roku at "+ip+"?", "Install"):
 			install = True
 
-			if not os.path.isfile(folder+"/manifest"):
+			if not os.path.isfile(os.path.join(folder,"manifest")):
 				sublime.message_dialog("'manifest' file missing")
 				install = False
 
-			if not os.path.isdir(folder+"/source"):
+			if not os.path.isdir(os.path.join(folder,"source")):
 				sublime.message_dialog("'source' directory missing")
 				install = False
 
 			if install:
-				subprocess.Popen(["python", "BrightScript-Installer-Plugin/install.py", username, password, url, folder])
+				subprocess.Popen(["python", os.path.join("BrightScript-Installer-Plugin","install.py"), username, password, url, folder])
 				sublime.message_dialog("Your channel is being installed.\nPlease be patient, this may take a while.")
 
 	def is_visible(self, dirs):
