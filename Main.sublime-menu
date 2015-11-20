@@ -22,6 +22,10 @@
           {
           "command": "install_to_roku_settings_ip",
           "caption": "Set IP Address"
+          },
+          {
+          "command": "install_to_roku_settings_path",
+          "caption": "Manually Set Path"
           }
         ]
       }

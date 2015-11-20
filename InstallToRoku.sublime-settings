@@ -1,4 +1,5 @@
 {
+	"roku_channel_path": "/home/asojka09/Development/Roku/Roku-Neon-Channel/Channel",
 	"roku_ip_address": "192.168.0.43",
 	"roku_password": "password",
 	"roku_username": "rokudev"

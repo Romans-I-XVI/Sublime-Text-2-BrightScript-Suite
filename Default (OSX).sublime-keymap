@@ -1,2 +1,3 @@
 [
+{ "keys": ["ctrl+shift+i"], "command": "install_to_roku", "args": {"dirs": [false]} }
 ]
