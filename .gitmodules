@@ -1,0 +1,11 @@
+[submodule "BrightScript-Sublime-Snippets"]
+path = BrightScript-Sublime-Snippets
+url = https://github.com/Romans-I-XVI/BrightScript-Sublime-Snippets.git
+
+[submodule "BrightScript.tmbundle"]
+path = BrightScript.tmbundle
+url = https://github.com/cmink/BrightScript.tmbundle.git
+
+[submodule "Roku-gameEngine-Sublime-Snippets"]
+path = Roku-gameEngine-Sublime-Snippets
+url = https://github.com/Romans-I-XVI/Roku-gameEngine-Sublime-Snippets.git
