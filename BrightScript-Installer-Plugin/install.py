@@ -15,8 +15,9 @@ zfile = zipfile.ZipFile("channel.zip", 'w', zipfile.ZIP_DEFLATED)
 rootlen = len(folder) + 1
 for base, dirs, files in os.walk(folder):
 	for file in files:
-		fn = os.path.join(base, file)
-		zfile.write(fn, fn[rootlen:])
+		if file != ".git" and file != "LICENSE" and file != "README.md":
+			fn = os.path.join(base, file)
+			zfile.write(fn, fn[rootlen:])
 zfile.close()
 
 curl = pycurl.Curl()
